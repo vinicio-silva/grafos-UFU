@@ -26,9 +26,9 @@ def findMinimumEdges(grafo, N):
 def dfs(u, grafo, visited, grauEntrada, grauSaida):
     visited[u] = 1
 
-    for v in grafo.adj[u]:  # Incrimenta o grau de entrada do vértice v e saída do vértice u
-        grauEntrada[u] = 1
-        grauSaida[v] = 1
+    for v in grafo.adj[u]:  # Atribui 1 ao grau de entrada do vértice v e o grau de saída do vértice u
+        grauEntrada[v] = 1
+        grauSaida[u] = 1
         
         if (visited[v] == 0):
             dfs(v, grafo, visited, grauEntrada, grauSaida)
