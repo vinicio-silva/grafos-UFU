@@ -12,19 +12,19 @@ class Grafo:
         self.adj[v2][v1] = custo  # Cria aresta v2-v1 e atribui um custo
 
     def find(self, v, parent):
-        if parent[v] == -1: # Verifica se é raiz do conjunto
+        if parent[v] == -1: # Verifica conjunto de um vértice pela raiz
             return v 
         return self.find(parent[v], parent)
 
-    def union(self, v1, v2, parent):
+    def union(self, v1, v2, parent): # União dos dois conjuntos
         raiz_v1 = self.find(v1, parent)
         raiz_v2 = self.find(v2, parent)
-        parent[raiz_v1] = raiz_v2 # União dos dois conjuntos
+        parent[raiz_v1] = raiz_v2 
 
-    def calcular_mst(self):
+    def kruskal(self):
         mst = [] # Arestas da árvore geradora mínima
         arestas = [] # Armazenar arestas do grafo
-        parent = {} # Armazenar os conjuntos distuntos
+        parent = {} # Armazenar os conjuntos distuntos para verificar ciclos
 
         for v1 in self.adj:
             parent[v1] = -1  # Inicialize o conjunto disjunto para cada vértice (raiz)
