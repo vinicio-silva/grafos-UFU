@@ -1,9 +1,8 @@
 from collections import deque
 
 class Grafo:
-    def __init__(self, E):
+    def __init__(self):
         self.adj = {}  # Dicionário para armazenar listas de adjacência
-        self.E = E
 
     def add_vertice(self, v):
         if v not in self.adj:
@@ -14,7 +13,7 @@ class Grafo:
 
     def bfs(self, v):
         fila = deque()
-        fila.append((v, 0))  # Tupla (vertice, camada)
+        fila.append((v, 0))  # Tupla (vertice, camada) -> source da novidade é a camada 0
         visitados = set()
         camadas = {}  # Quantidade de nos em cada camada
 
@@ -33,15 +32,15 @@ class Grafo:
                     fila.append((vizinho, camada + 1))
                     visitados.add(vizinho)
 
-        D = max(camadas, key=camadas.get)
-        M = camadas[D]
+        D = max(camadas, key=camadas.get) # First boom day
+        M = camadas[D] # Maximum daily boom size
 
         return M, D
 
 def main():
     E = int(input())  # Leitura do numero de funcionarios
 
-    grafo = Grafo(E)  # Inicialização do grafo
+    grafo = Grafo()  # Inicialização do grafo
 
     for i in range(E):  # Criando arestas que representam as amizades
         grafo.add_vertice(i)
@@ -59,7 +58,7 @@ def main():
         results.append((M, D))
 
     for M, D in results:
-        if D == 0 or M == 0:
+        if D == 0 or M == 0:  # Somente source ouviu a informação
             print(0)
         else:
             print(M, D)
